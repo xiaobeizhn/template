@@ -29,7 +29,6 @@ int main(){
         for(int i=1;i<=n;i++)cnt[RK[cur][i]]++;
         for(int i=1;i<=n;i++)cnt[i]+=cnt[i-1];
         for(int i=n;i>0;i--)SA[cnt[RK[cur][subSA[i]]]--]=subSA[i];
-        // printf("SA");for(int i=1;i<=n;i++)cout<<SA[i]<<" ";puts("");
         p=1,RK[cur^1][SA[1]]=1;
         for(int i=2;i<=n;i++){
             if(RK[cur][SA[i]]==RK[cur][SA[i-1]]&&RK[cur][subSA[i]]==RK[cur][subSA[i-1]])RK[cur^1][SA[i]]=p;
