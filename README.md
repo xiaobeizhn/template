@@ -496,6 +496,10 @@ int main() {
 #define N 1000005
 #define LL long long
 using namespace std;
+template<typename T>
+const T Max(const T a,const T b){
+    return a>b?a:b;
+}
 int n,m;
 int SA[N],subSA[N],cnt[N],RK[2][N];
 bool cur=0;
@@ -531,9 +535,16 @@ void LCP(){
     height[1]=0;
     for(int i=2;i<=n;i++){
         if(k)k--;
-        int mi=n;
-        while(SA[i]+k<=n&&SA[i-1]+k<=n&&str[SA[i]+k]==str[SA[j]+k])k++;
+        while(SA[i]+k<=n&&SA[i-1]+k<=n&&str[SA[i]+k]==str[SA[i-1]+k])k++;
         height[i]=k;
     }
 }
+int main(){
+    scanf("%s",str+1);
+    n=strlen(str+1);
+    get_SA();
+    LCP();
+    return 0;
+}
+
 ```
