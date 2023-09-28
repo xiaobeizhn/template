@@ -3,13 +3,14 @@
 #define LL long long
 using namespace std;
 template<typename T>
+const T Max(const T a,const T b){
+    return a>b?a:b;
+}
 int n,m;
 int SA[N],subSA[N],cnt[N],RK[2][N];
+bool cur=0;
 char str[N];
-int main(){
-    scanf("%s",str+1);
-    n=strlen(str+1);
-    bool cur=0;
+void get_SA(){
     for(int i=1;i<=n;i++)cnt[str[i]]++,m=Max((int)str[i],m);
     for(int i=1;i<=m;i++)cnt[i]+=cnt[i-1];
     for(int i=1;i<=n;i++)RK[cur][i]=cnt[str[i]];
@@ -33,6 +34,22 @@ int main(){
         }
     }
     for(int i=1;i<=n;i++)SA[RK[cur][i]]=i;
-    for(int i=1;i<=n;i++)printf("%d ",SA[i]);
+}
+int height[N];
+void LCP(){
+    int k=0;
+    height[1]=0;
+    for(int i=2;i<=n;i++){
+        if(k)k--;
+        int mi=n;
+        while(SA[i]+k<=n&&SA[i-1]+k<=n&&str[SA[i]+k]==str[SA[j]+k])k++;
+        height[i]=k;
+    }
+}
+int main(){
+    scanf("%s",str+1);
+    n=strlen(str+1);
+    get_SA();
+    LCP();
     return 0;
 }
