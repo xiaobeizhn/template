@@ -2,18 +2,10 @@
 #define N 1005
 #define LL long long
 using namespace std;
-template <typename T> T Max(T a,T b){
-    return a>b?a:b;
-}
-template <typename T> T Min(T a,T b){
-    return a<b?a:b;
-}
 char A[N],B[N];
 int P[N];
 int n,m;
 int main(){
-    freopen("D:/in.txt","r",stdin);
-    freopen("D:/out.txt","w",stdout);
     while(~scanf("%s%s",A+1,B+1)){
         n=strlen(A+1),m=strlen(B+1);
         P[1]=0;
