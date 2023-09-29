@@ -533,10 +533,14 @@ int height[N];
 void LCP(){
     int k=0;
     height[1]=0;
-    for(int i=2;i<=n;i++){
-        if(k)k--;
-        while(SA[i]+k<=n&&SA[i-1]+k<=n&&str[SA[i]+k]==str[SA[i-1]+k])k++;
-        height[i]=k;
+    for(int i=1;i<=n;i++){
+        if(RK[cur][i]==1)k=0;
+        else {
+            if(k)k--;
+            int j=SA[RK[cur][i]-1];
+            while(i+k<=n&&j+k<=n&&str[i+k]==str[j+k])k++;
+            height[RK[cur][i]]=k;
+        }
     }
 }
 int main(){
