@@ -29,10 +29,7 @@ void get_SA(){
             else RK[cur^1][SA[i]]=++p;
         }
         cur^=1;
-        if(p==n){
-            cur^=1;
-            break;
-        }
+        if(p==n)break;
     }
     for(int i=1;i<=n;i++)SA[RK[cur][i]]=i;
 }
