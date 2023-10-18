@@ -18,7 +18,7 @@ struct node{
         return d;
     }
     bool operator < (const node &_)const{
-        return g()+h()>_.g()+_.h();
+        return d+h()>_.d+_.h();
     }
     void Print(){
         cout<<x<<" "<<y<<" "<<g()<<" "<<h()<<endl;
@@ -54,6 +54,17 @@ void Clear(){
     return ;
 }
 
+// void Show_map(node now){
+//     for(int i=1;i<=n;i++){
+//         for(int j=1;j<=m;j++){
+//             if(i==now.x&&j==now.y)putchar('*');
+//             else printf("%c",mp[i][j]);
+//         }
+//         puts("");
+//     }
+//     puts("");
+// }
+
 void Astar(){
     OPEN.push((node)<%bx,by,0%>);
     CLOSE[bx][by]=1;
@@ -61,6 +72,7 @@ void Astar(){
         node now=OPEN.top();
         OPEN.pop();
         // now.Print();
+        // Show_map(now);
         for(int i=0;i<4;i++){
             node nxt=(node)<%now.x+dx[i],now.y+dy[i],now.d+1%>;
             if(nxt.x<1||nxt.x>n||nxt.y<1||nxt.y>m||mp[nxt.x][nxt.y]=='#'||CLOSE[nxt.x][nxt.y])continue;
@@ -76,6 +88,7 @@ void Astar(){
 
 int main(){
     Init();
+    // puts("");
     Clear();
     Astar();
     if(Ans==-1)cout<<"无法到达"<<endl;
