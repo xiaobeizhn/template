@@ -11,57 +11,59 @@ const T & Min(const T &a,const T &b){
     return a<b?a:b;
 }
 
-//小根堆
-template<class T>
-class Priority_queue{
-    private:
-        T *data;
-        int sz,capacity;
-        void Up(int now){
-            T res=data[now];
-            while(now>1 && data[now>>1]>data[now])data[now]=data[now>>1],now>>=1;
-            data[now]=res;
-        }
-        void Down(int now){
-            T res=data[now];
-            while((now<<1)<=sz && data[now<<1]<data[now])
-                if(now<<1|1<=sz && data[now<<1]<data[now<<1|1])data[now]=data[now<<1],now<<=1;
-                else data[now]=data[now<<1|1],now=now<<1|1;
-            data[now]=res;
-        }
-    public:
-        Priority_queue(T *_data){
-            capacity=sizeof(data)/sizeof(int);
-            data=new T[capacity];
-            sz=0;
-        }
-        Priority_queue(int _c){
-            data=new T[_c];
-            capacity=_c;
-            sz=0;
-        }
-        Priority_queue(){
-            data=new T[N];
-            capacity=N;
-            sz=0;
-        }
-        ~Priority_queue(){
-            delete[] data;
-        }
-        void pop(){
-            data[1]=data[sz--];
-            Down(1);
-        }
-        void push(int x){
-            data[++sz]=x;
-            Up(sz);
-        } 
-        T top(){
-            return data[1];
-        }
-        int size(){
-            return sz;
-        }
+// 小根堆
+template <class T>
+class Priority_queue {
+   private:
+    T* data;
+    int sz, capacity;
+    void Up(int now) {
+        T res = data[now];
+        while (now > 1 &&  data[now] < data[now >> 1])
+            data[now] = data[now >> 1], now >>= 1;
+        data[now] = res;
+    }
+    void Down(int now) {
+        T res = data[now];
+        while ((now << 1) <= sz && data[now << 1] < data[now])
+            if (now << 1 | 1 <= sz && data[now << 1] < data[now << 1 | 1])
+                data[now] = data[now << 1], now <<= 1;
+            else
+                data[now] = data[now << 1 | 1], now = now << 1 | 1;
+        data[now] = res;
+    }
+
+   public:
+    Priority_queue(T* _data) {
+        capacity = sizeof(data) / sizeof(int);
+        data = new T[capacity];
+        sz = 0;
+    }
+    Priority_queue(int _c) {
+        data = new T[_c];
+        capacity = _c;
+        sz = 0;
+    }
+    Priority_queue() {
+        data = new T[N];
+        capacity = N;
+        sz = 0;
+    }
+    ~Priority_queue() { delete[] data; }
+    void clear() {
+        memset(data, 0, sizeof data);
+        sz = 0;
+    }
+    void pop() {
+        data[1] = data[sz--];
+        Down(1);
+    }
+    void push(T x) {
+        data[++sz] = x;
+        Up(sz);
+    }
+    T top() { return data[1]; }
+    int size() { return sz; }
 };
 
 Priority_queue<int>Q;
