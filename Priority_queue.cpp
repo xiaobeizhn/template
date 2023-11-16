@@ -48,10 +48,6 @@ class Priority_queue{
         ~Priority_queue(){
             delete[] data;
         }
-        void clear(){
-            memset(data,0,sizeof data);
-            sz=0;
-        }
         void pop(){
             data[1]=data[sz--];
             Down(1);
@@ -60,8 +56,11 @@ class Priority_queue{
             data[++sz]=x;
             Up(sz);
         } 
-        int top(){
+        T top(){
             return data[1];
+        }
+        int size(){
+            return sz;
         }
 };
 
